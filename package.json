@@ -7,6 +7,15 @@
     "engines": {
         "vscode": "^1.26.0"
     },
+    "bugs": {
+        "url": "https://github.com/Logerfo/open-all-files/issues",
+        "email": "bruno@logerfo.tk"
+    },
+    "homepage": "https://github.com/Logerfo/open-all-files/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Logerfo/open-all-files.git"
+    },
     "categories": [
         "Other"
     ],

@@ -1,27 +1,48 @@
-'use strict';
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+    context.subscriptions.push(vscode.commands.registerCommand('extension.openAllFiles', openAllFiles));
+}
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "open-all-files" is now active!');
+function getRootPath(basePath?) {
+    const { workspaceFolders } = vscode.workspace;
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
+    if (!workspaceFolders)
+        return;
 
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
+    const firstRootPath = workspaceFolders[0].uri.fsPath;
 
-    context.subscriptions.push(disposable);
+    if (!basePath)
+        return firstRootPath;
+
+    const rootPaths = workspaceFolders.map(folder => folder.uri.fsPath);
+    const sortedRootPaths = rootPaths.sort(path => path.length).reverse();
+    return sortedRootPaths.find(rootPath => basePath.startsWith(rootPath));
+}
+
+async function openAllFiles(args) {
+    if (args == null)
+        args = { _fsPath: vscode.workspace.rootPath };
+
+    let incomingPath: string = args._fsPath;
+    const rootPath = getRootPath(incomingPath);
+    const relPath = incomingPath.substring(rootPath.length + 1);
+    const glob = path.join(relPath, '*');
+    const findFiles = await vscode.workspace.findFiles(glob, (vscode.workspace.getConfiguration().get('files') as any).exclude);
+    const filesPaths = findFiles.map(file => file.fsPath);
+    const filesPathsSorted = filesPaths.sort();
+    filesPathsSorted.forEach(await openFile);
+}
+
+async function openFile(path) {
+    const uri = vscode.Uri.file(path);
+    //vscode.commands.executeCommand('vscode.open', uri);
+    vscode.workspace.openTextDocument(uri).then(doc => vscode.window.showTextDocument(doc, { preview: false }), _err => { });
 }
 
 // this method is called when your extension is deactivated

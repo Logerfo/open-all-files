@@ -11,6 +11,11 @@
         "url": "https://github.com/Logerfo/open-all-files/issues",
         "email": "bruno@logerfo.tk"
     },
+    "author": {
+        "email": "bruno@logerfo.tk",
+        "name": "Bruno Logerfo",
+        "url": "https://github.com/Logerfo"
+    },
     "homepage": "https://github.com/Logerfo/open-all-files/blob/master/README.md",
     "repository": {
         "type": "git",

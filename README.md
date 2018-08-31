@@ -12,4 +12,8 @@ Feel free to open any issues or pull requests.
 
 Initial release.
 
+### 0.0.2
+
+Added some metadata.
+
 -----------------------------------------------------------------------------------------------------------

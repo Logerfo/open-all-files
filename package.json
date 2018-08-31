@@ -2,7 +2,7 @@
     "name": "open-all-files",
     "displayName": "Open All Files",
     "description": "Open all files in folder.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "logerfo",
     "engines": {
         "vscode": "^1.26.0"

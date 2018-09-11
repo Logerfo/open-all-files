@@ -63,7 +63,7 @@ async function openAllFiles(args) {
 async function openFile(path) {
     const uri = vscode.Uri.file(path);
     //vscode.commands.executeCommand('vscode.open', uri);
-    vscode.workspace.openTextDocument(uri).then(doc => vscode.window.showTextDocument(doc, { preview: false }), _err => { });
+    await vscode.workspace.openTextDocument(uri).then(doc => vscode.window.showTextDocument(doc, { preview: false }), _err => { });
 }
 
 // this method is called when your extension is deactivated

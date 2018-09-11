@@ -30,6 +30,25 @@
     ],
     "main": "./out/extension",
     "contributes": {
+        "configuration":[
+            {
+                "type": "object",
+                "title": "Open All Files",
+                "properties": {
+                    "open-all-files.maxFilesWithoutConfirmation": {
+                        "scope": "resource",
+                        "type": "number",
+                        "default": 10,
+                        "description": "Set to 0 to always request confirmation and -1 to never request confirmation."
+                    },
+                    "open-all-files.recursive": {
+                        "scope": "resource",
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            }
+        ],
         "commands": [
             {
                 "command": "extension.openAllFiles",

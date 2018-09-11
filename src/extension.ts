@@ -1,7 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -30,13 +29,31 @@ async function openAllFiles(args) {
         args = { _fsPath: vscode.workspace.rootPath };
 
     let incomingPath: string = args._fsPath;
+    const configuration = vscode.workspace.getConfiguration("open-all-files", args._fsPath);
     const rootPath = getRootPath(incomingPath);
     const relPath = incomingPath.substring(rootPath.length + 1);
-    const glob = path.join(relPath, '*');
-    const findFiles = await vscode.workspace.findFiles(glob, (vscode.workspace.getConfiguration().get('files') as any).exclude);
+    let glob = relPath + '/*';
+    const recurisve = configuration.get('recursive', false);
+    if(recurisve)
+        glob += '*';
+
+    const findFiles = await vscode.workspace.findFiles(glob, (vscode.workspace.getConfiguration(undefined, args._fsPath).get('files') as any).exclude);
     const filesPaths = findFiles.map(file => file.fsPath);
-    const filesPathsSorted = filesPaths.sort();
-    filesPathsSorted.forEach(await openFile);
+    const maxFilesWithoutConfirmation = configuration.get('maxFilesWithoutConfirmation', 10);
+    if (maxFilesWithoutConfirmation >= 0 && filesPaths.length >= maxFilesWithoutConfirmation) {
+        await vscode.window.showWarningMessage(`Are you sure you want to open ${filesPaths.length} files at once?`, "Yes", "No")
+                     .then(async answer => {
+                         if (answer == "Yes")
+                            await openAll();
+                     });
+    }
+    else
+        await openAll();
+
+    async function openAll() {
+        const filesPathsSorted = filesPaths.sort();
+        filesPathsSorted.forEach(await openFile);
+    }
 }
 
 async function openFile(path) {

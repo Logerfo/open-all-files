@@ -4,16 +4,10 @@ Right click in a folder and click in "Open All Files". Only supports text files 
 
 # Contributing
 
-Feel free to open any issues or pull requests.
+Feel free to open any issues or pull requests. I will try to make time for them, if any.
 
-## Release Notes
+# Release Notes
 
-### 0.0.1
-
-Initial release.
-
-### 0.0.2
-
-Added some metadata.
+See [here](CHANGELOG.md).
 
 -----------------------------------------------------------------------------------------------------------

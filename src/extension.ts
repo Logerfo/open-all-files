@@ -39,6 +39,10 @@ async function openAllFiles(args) {
 
     const findFiles = await vscode.workspace.findFiles(glob, (vscode.workspace.getConfiguration(undefined, args._fsPath).get('files') as any).exclude);
     const filesPaths = findFiles.map(file => file.fsPath);
+    if (filesPaths.length == 0) {
+        vscode.window.showInformationMessage("No files found in folder.");
+        return;
+    }
     const maxFilesWithoutConfirmation = configuration.get('maxFilesWithoutConfirmation', 10);
     if (maxFilesWithoutConfirmation >= 0 && filesPaths.length >= maxFilesWithoutConfirmation) {
         await vscode.window.showWarningMessage(`Are you sure you want to open ${filesPaths.length} files at once?`, "Yes", "No")

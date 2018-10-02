@@ -44,7 +44,8 @@
                     "open-all-files.recursive": {
                         "scope": "resource",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "description": "Choose whether the file search should be recursive (**) or not (*)."
                     }
                 }
             }

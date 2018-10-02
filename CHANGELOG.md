@@ -19,3 +19,7 @@ Added some metadata.
 - To never request confirmation: `-1`.
 
 A new information message will be shown if no files were found in the selected folder (based on the recursive configuration). The message will not be shown if files were found but none of them was a text file, resulting in no files open at all.
+
+## 0.0.4
+
+Added a description for the "recursive" configuration.

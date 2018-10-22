@@ -5,7 +5,7 @@ import * as vscode from 'vscode';
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    context.subscriptions.push(vscode.commands.registerCommand('extension.openAllFiles', openAllFiles));
+    context.subscriptions.push(vscode.commands.registerCommand('open-all-files.openAllFiles', openAllFiles));
 }
 
 function getRootPath(basePath?) {

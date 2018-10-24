@@ -23,3 +23,4 @@ A new information message will be shown if no files were found in the selected f
 ## 0.0.4
 
 Added a description for the "recursive" configuration.
+Command name changed from `extension.openAllFiles` to `open-all-files.OpenAllFiles`.

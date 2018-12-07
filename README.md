@@ -13,3 +13,9 @@ Right click in a folder and click in "Open All Files". Only supports text files 
 Feel free to open any issues or pull requests. I will try to make time for them, if any.
 
 # [Release Notes](CHANGELOG.md)
+
+# Donate
+
+<img src="btc.png" width="200">
+
+BTC: 1LoGErFoNzE1gCA5fzk6A82nV6iJdKssSZ

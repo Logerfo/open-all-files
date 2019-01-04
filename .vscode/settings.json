@@ -10,8 +10,7 @@
     "typescript.tsc.autoDetect": "off",
     "git.ignoreLimitWarning": true,
     "spellright.language": [
-        "en",
-        "pt"
+        "en"
     ],
     "spellright.documentTypes": [
         "markdown",

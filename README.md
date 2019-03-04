@@ -5,6 +5,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/logerfo/open-all-files/badge.svg)](https://snyk.io/test/github/logerfo/open-all-files)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLogerfo%2Fopen-all-files.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FLogerfo%2Fopen-all-files?ref=badge_shield)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Logerfo/open-all-files.svg)](https://greenkeeper.io/)
+[![Dependencies Status](https://david-dm.org/logerfo/open-all-files/dev-status.svg)](https://david-dm.org/logerfo/open-all-files?type=dev)
 
 # Open All Files
 

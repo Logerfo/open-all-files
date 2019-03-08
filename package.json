@@ -30,7 +30,7 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "configuration":[
+        "configuration": [
             {
                 "type": "object",
                 "title": "Open All Files",
@@ -66,16 +66,19 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
+        "vscode:prepublish": "webpack --mode production",
+        "compile": "webpack --mode none",
+        "watch": "webpack --mode none --watch",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^11.10.4",
+        "ts-loader": "^5.3.3",
+        "tslint": "^5.8.0",
         "typescript": "^3.3.3333",
         "vscode": "^1.1.21",
-        "tslint": "^5.8.0",
-        "@types/node": "^11.10.4",
-        "@types/mocha": "^5.2.6"
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.2.3"
     }
 }

@@ -24,3 +24,6 @@ Command name changed from `extension.openAllFiles` to `open-all-files.OpenAllFil
 
 ## 0.0.5
 Performance improvements.
+
+## 0.0.6
+Not showing the context menu when the selected item is a file.

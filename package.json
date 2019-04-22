@@ -60,7 +60,8 @@
             "explorer/context": [
                 {
                     "command": "open-all-files.openAllFiles",
-                    "group": "navigation"
+                    "group": "navigation",
+                    "when": "explorerResourceIsFolder"
                 }
             ]
         }

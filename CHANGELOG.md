@@ -27,3 +27,6 @@ Performance improvements.
 
 ## 0.0.6
 Not showing the context menu when the selected item is a file.
+
+## 0.0.7
+Removed the command from the palette.

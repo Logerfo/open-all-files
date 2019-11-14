@@ -8,40 +8,23 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('open-all-files.openAllFiles', openAllFiles));
 }
 
-function getRootPath(basePath?: string) {
-    const { workspaceFolders } = vscode.workspace;
-
-    if (!workspaceFolders) {
-        return;
-    }
-
-    const firstRootPath = workspaceFolders[0].uri.fsPath;
-
-    if (!basePath) {
-        return firstRootPath;
-    }
-
-    const rootPaths = workspaceFolders.map(folder => folder.uri.fsPath);
-    const sortedRootPaths = rootPaths.sort(path => path.length).reverse();
-    return sortedRootPaths.find(rootPath => basePath.startsWith(rootPath));
-}
-
-async function openAllFiles(args: { _fsPath: any; }) {
+async function openAllFiles(args: { fsPath: any; }) {
+    let uri: vscode.Uri, incomingPath: string;
     if (!args) {
-        args = { _fsPath: vscode.workspace.rootPath };
+        uri = vscode.workspace.workspaceFolders[0].uri;
+        incomingPath = uri.fsPath;
     }
-
-    let incomingPath: string = args._fsPath;
-    const configuration = vscode.workspace.getConfiguration("open-all-files", args._fsPath);
-    const rootPath = getRootPath(incomingPath);
-    const relPath = incomingPath.substring(rootPath.length + 1);
-    let glob = relPath + '/*';
+    else {
+        incomingPath = args.fsPath;
+        uri = vscode.Uri.file(incomingPath);
+    }
+    const configuration = vscode.workspace.getConfiguration("open-all-files", uri);
+    let glob = '*';
     const recurisve = configuration.get('recursive', false);
-    if(recurisve) {
+    if (recurisve) {
         glob += '*';
     }
-
-    const findFiles = await vscode.workspace.findFiles(glob, (vscode.workspace.getConfiguration(undefined, args._fsPath).get('files') as any).exclude);
+    const findFiles = await vscode.workspace.findFiles(new vscode.RelativePattern(incomingPath, glob), (vscode.workspace.getConfiguration(undefined, uri).get('files') as any).exclude);
     const filesPaths = findFiles.map(file => file.fsPath);
     if (filesPaths.length == 0) {
         vscode.window.showInformationMessage("No files found in folder.");
@@ -50,11 +33,11 @@ async function openAllFiles(args: { _fsPath: any; }) {
     const maxFilesWithoutConfirmation = configuration.get('maxFilesWithoutConfirmation', 10);
     if (maxFilesWithoutConfirmation >= 0 && filesPaths.length >= maxFilesWithoutConfirmation) {
         await vscode.window.showWarningMessage(`Are you sure you want to open ${filesPaths.length} files at once?`, "Yes", "No")
-                     .then(async answer => {
-                         if (answer == "Yes") {
-                            await openAll();
-                         }
-                     });
+                           .then(async answer => {
+                                if (answer == "Yes") {
+                                   await openAll();
+                                }
+                            });
     }
     else {
         await openAll();

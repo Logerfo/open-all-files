@@ -20,7 +20,7 @@
     "homepage": "https://github.com/Logerfo/open-all-files/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Logerfo/open-all-files.git"
+        "url": "https://github.com/Logerfo/open-all-files.git"
     },
     "categories": [
         "Other"

@@ -78,7 +78,7 @@
         "watch": "webpack --mode none --watch"
     },
     "devDependencies": {
-        "@types/mocha": "10.0.5",
+        "@types/mocha": "10.0.6",
         "@types/node": "20.9.3",
         "ts-loader": "9.5.1",
         "tslint": "6.1.3",

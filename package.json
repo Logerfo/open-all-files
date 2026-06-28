@@ -85,6 +85,6 @@
         "typescript": "6.0.3",
         "@types/vscode": "1.26.0",
         "webpack": "5.108.1",
-        "webpack-cli": "7.0.3"
+        "webpack-cli": "7.1.0"
     }
 }
